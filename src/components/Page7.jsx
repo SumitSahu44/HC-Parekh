@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
+// Ensure correct import matches the installed package
 import Lenis from '@studio-freight/lenis';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -43,8 +44,6 @@ const PortfolioWebsite = () => {
 
     let mouseX = 0;
     let mouseY = 0;
-    let cursorX = 0;
-    let cursorY = 0;
     let followerX = 0;
     let followerY = 0;
 
@@ -162,13 +161,13 @@ const PortfolioWebsite = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-white cursor-none">
+    <div className="relative min-h-screen bg-white cursor-none font-sans">
       {/* Custom Cursor */}
       <div ref={cursorRef} className="fixed w-2 h-2 bg-blue-600 rounded-full pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"></div>
       <div ref={cursorFollowerRef} className="fixed w-10 h-10 border-2 border-blue-600 rounded-full pointer-events-none z-40 transform -translate-x-1/2 -translate-y-1/2 opacity-30 transition-transform duration-300"></div>
 
       {/* Floating Background Elements */}
-      <div className="fixed inset-0 pointer-events-none z-1 overflow-hidden">
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div className="absolute w-72 h-72 top-10 -right-36 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-1"></div>
         <div className="absolute w-48 h-48 bottom-20 -left-24 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-2"></div>
         <div className="absolute w-36 h-36 top-60 right-1/4 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-3"></div>
@@ -176,21 +175,21 @@ const PortfolioWebsite = () => {
       </div>
 
       {/* Header */}
-      <header className="fixed top-0 w-full px-4 sm:px-6 lg:px-8 py-6 bg-white/95 backdrop-blur-lg z-40 border-b border-gray-100">
+      <header className="fixed top-0 w-full px-4 sm:px-6 lg:px-8 py-6 bg-white/95 backdrop-blur-lg z-40 border-b border-gray-100 transition-all duration-300">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
-            <div className="relative w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
+            <div className="relative w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-600/20">
               <span className="text-white font-bold text-xl">HCP</span>
               <div className="absolute bottom-3 right-3 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h1 className="text-lg font-bold text-gray-900">H.C. Parekh</h1>
-              <p className="text-sm text-blue-600">Senior Project Consultant & Investor</p>
+              <h1 className="text-lg font-bold text-gray-900 leading-tight">H.C. Parekh</h1>
+              <p className="text-sm text-blue-600 font-medium">Senior Project Consultant</p>
             </div>
           </div>
           <nav className="hidden md:flex space-x-8">
-            {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-800 font-medium hover:text-blue-600 transition-colors relative group">
+            {['About', 'Experience', 'Contact'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-600 font-medium hover:text-blue-600 transition-colors relative group py-2 interactive">
                 {item}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
               </a>
@@ -200,94 +199,77 @@ const PortfolioWebsite = () => {
       </header>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen px-4 sm:px-6 lg:px-8 py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto pt-16 md:pt-24 lg:pt-32">
+      <section ref={heroRef} className="min-h-screen px-4 sm:px-6 lg:px-8 flex items-center relative overflow-hidden pt-20">
+        <div className="max-w-7xl mx-auto w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="inline-flex items-center space-x-3 bg-blue-50 px-6 py-3 rounded-full">
-                <span className="text-blue-600 font-semibold">Est. 2007</span>
+            <div className="space-y-8 order-2 lg:order-1">
+              <div className="inline-flex items-center space-x-3 bg-blue-50 px-5 py-2 rounded-full border border-blue-100">
+                <span className="text-blue-700 font-semibold text-sm tracking-wide">EST. 2007</span>
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
               </div>
               
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight reveal-text">
-                Industrial & Corporate
-                <span className="text-blue-600 block mt-2">Project Consultant</span>
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-[1.1] reveal-text">
+                Industrial & Corporate <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-800">Authority.</span>
               </h1>
               
-              <p className="text-xl text-gray-600 leading-relaxed reveal-text">
-                {getExperienceYears()}+ years of expertise in Government, Corporate & Manufacturing sectors
+              <p className="text-xl text-gray-600 leading-relaxed reveal-text max-w-lg">
+                Bridging the gap between complex government regulations and corporate execution for over {getExperienceYears()} years.
               </p>
               
-              <div className="flex space-x-8">
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold text-blue-600">18+</h3>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Years Experience</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold text-blue-600">50+</h3>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-4xl font-bold text-blue-600">2</h3>
-                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Base Locations</p>
+              <div className="flex items-center gap-8 pt-4">
+                <a href="#contact" className="bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-600/30 hover:shadow-blue-600/50 hover:-translate-y-1 interactive">
+                  Get In Touch
+                </a>
+                <div className="flex flex-col">
+                   <span className="text-3xl font-bold text-gray-900">18+</span>
+                   <span className="text-xs text-gray-500 uppercase tracking-widest">Years Active</span>
                 </div>
               </div>
-
-              <a href="#contact" className="inline-flex items-center space-x-3 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl interactive">
-                <span>Get In Touch</span>
-                <div className="group-hover:translate-x-2 transition-transform">→</div>
-              </a>
             </div>
             
-            <div className="relative">
-              <div className="bg-white p-6 rounded-2xl shadow-2xl">
-                <div className="relative overflow-hidden rounded-xl">
-                  <img 
-                    src="https://img.freepik.com/free-photo/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background_662251-838.jpg?semt=ais_hybrid&w=740&q=80" 
-                    alt="H.C. Parekh - Professional Consultant"
-                    className="w-full h-[500px] object-cover rounded-xl transform transition-transform duration-500 hover:scale-105"
-                  />
-                </div>
-                
-                {/* Floating Badges */}
-                <div className="absolute -top-3 right-12 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-1">
-                  <span className="text-xl">🏭</span>
-                  <span className="font-semibold text-gray-800">Industrial</span>
-                </div>
-                <div className="absolute bottom-16 -left-3 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-2">
-                  <span className="text-xl">🏛️</span>
-                  <span className="font-semibold text-gray-800">Government</span>
-                </div>
-                <div className="absolute -bottom-3 right-16 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-3">
-                  <span className="text-xl">💼</span>
-                  <span className="font-semibold text-gray-800">Corporate</span>
+            <div className="relative order-1 lg:order-2">
+              <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                <img 
+                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=1000&auto=format&fit=crop" 
+                  alt="Corporate Building"
+                  className="w-full h-[500px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white">
+                   <p className="font-bold text-lg">Strategic Consultant</p>
+                   <p className="text-sm opacity-80">Government & Private Sector</p>
                 </div>
               </div>
+              {/* Decorative elements behind image */}
+              <div className="absolute -top-4 -right-4 w-full h-full border-2 border-blue-600 rounded-2xl -z-10"></div>
             </div>
           </div>
         </div>
       </section>
 
       {/* About Section */}
-      <section ref={el => sectionsRef.current[0] = el} className="py-20 px-4 sm:px-6 lg:px-8" id="about">
+      <section ref={el => sectionsRef.current[0] = el} className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-50/50" id="about">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Professional Overview</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
+            <div>
+               <h2 className="text-blue-600 font-bold tracking-widest uppercase text-sm mb-2">My Expertise</h2>
+               <h3 className="text-4xl font-bold text-gray-900">Professional Overview</h3>
+            </div>
+            <p className="text-gray-500 max-w-md">Operating from dual bases in Bhubaneswar and Bengaluru to serve clients Pan-India.</p>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: '📋', title: 'Working Model', desc: 'Freelance Consultant', detail: 'Independent consultant offering flexible engagement models' },
-              { icon: '🏭', title: 'Industries Served', desc: 'Government, Corporate & Manufacturing', detail: 'Multi-sector expertise with deep industry knowledge' },
-              { icon: '📍', title: 'Base Locations', desc: 'Bhubaneswar / Bengaluru', detail: 'Operating pan-India with dual operational bases' },
-              { icon: '🎯', title: 'Specialization', desc: 'End-to-End Project Implementation', detail: 'From concept to completion and beyond' }
+              { icon: '📋', title: 'Consultancy', desc: 'Flexible engagement models for diverse needs.' },
+              { icon: '🏭', title: 'Industries', desc: 'NPCIL, BARC, Textile & Heavy Mfg.' },
+              { icon: '📍', title: 'Locations', desc: 'Bhubaneswar & Bengaluru Bases.' },
+              { icon: '🎯', title: 'Execution', desc: 'End-to-End Project Implementation.' }
             ].map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
-                <div className="text-3xl mb-4">{item.icon}</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-blue-600 font-semibold mb-3">{item.desc}</p>
-                <p className="text-gray-600 text-sm">{item.detail}</p>
+              <div key={index} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group interactive">
+                <div className="text-4xl mb-6 group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -295,263 +277,122 @@ const PortfolioWebsite = () => {
       </section>
 
       {/* Experience Timeline */}
-      <section ref={el => sectionsRef.current[1] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50" id="experience">
+      <section ref={el => sectionsRef.current[1] = el} className="py-24 px-4 sm:px-6 lg:px-8" id="experience">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Area of Expertise</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+           <div className="text-center mb-20">
+            <h2 className="text-sm font-bold tracking-widest uppercase text-blue-600 mb-3">Portfolio</h2>
+            <h3 className="text-4xl md:text-5xl font-bold text-gray-900">Key Sectors Served</h3>
           </div>
           
-          <div className="relative max-w-3xl mx-auto">
-            {/* Timeline line */}
-            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600"></div>
-            
-            {[
-              {
-                title: 'Government Projects',
-                items: [
-                  'Nuclear Power Corporation of India Ltd. (NPCIL)',
-                  'Medical & Healthcare Projects (Government of India)',
-                  'Bhabha Atomic Research Centre - Environment & Radiological Laboratory'
-                ]
-              },
-              {
-                title: 'Industrial Sectors',
-                items: [
-                  'Textile & Garment Industry',
-                  'Pulp & Paper Industry',
-                  'Plastic Manufacturing Industry',
-                  'Information Technology',
-                  'FMCG'
-                ]
-              },
-              {
-                title: 'Current Engagement',
-                items: [
-                  {
-                    type: 'project',
-                    title: 'Large IT & Digitalization Project',
-                    desc: 'Government High School for Deaf and Dumb, Andhra Pradesh',
-                    status: 'Ongoing'
-                  }
-                ]
-              }
-            ].map((section, idx) => (
-              <div key={idx} className="relative mb-12 flex items-start">
-                <div className="absolute left-0 w-16 h-16 bg-white border-4 border-blue-600 rounded-full flex items-center justify-center z-10"></div>
-                <div className="ml-24 bg-white p-8 rounded-2xl shadow-lg flex-1">
-                  <h3 className="text-2xl font-bold text-blue-600 mb-4">{section.title}</h3>
-                  {section.items.map((item, itemIdx) => (
-                    section.title === 'Current Engagement' ? (
-                      <div key={itemIdx} className="bg-blue-50 p-6 rounded-xl">
-                        <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
-                        <p className="text-gray-600 mb-3">{item.desc}</p>
-                        <span className="inline-block bg-emerald-500 text-white px-4 py-1 rounded-full text-sm">
-                          {item.status}
-                        </span>
-                      </div>
-                    ) : (
-                      <div key={itemIdx} className="flex items-start mb-3">
-                        <div className="text-blue-600 mr-3 mt-1">•</div>
-                        <p className="text-gray-700">{item}</p>
-                      </div>
-                    )
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Corporate Expertise */}
-      <section ref={el => sectionsRef.current[2] = el} className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Corporate Expertise</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              'Industrial MOUs & Joint Ventures',
-              'Corporate Investors & Investments',
-              'Tenders & Contracts',
-              'Dealers, Distributors & Franchise Management',
-              'Indenting & Procurement',
-              'Central Material Management',
-              'Vendor Management',
-              'Company Debt Recovery & Settlement',
-              'Labour Dispute Settlement',
-              'Consumer Grievance Resolution',
-              'Government Arbitration & Conciliation'
-            ].map((item, index) => (
-              <div key={index} className="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 interactive">
-                <div className="text-blue-600 font-bold">✓</div>
-                <span className="text-gray-800">{item}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Professional History */}
-      <section ref={el => sectionsRef.current[3] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Professional History</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: 'Chief Business Officer (CBO)',
-                company: 'IT Company',
-                location: 'Pune, Maharashtra',
-                tags: ['Leadership', 'Strategy', 'Business Development']
-              },
-              {
-                title: 'General Manager (Business)',
-                company: 'Plastic Manufacturing',
-                location: 'Odisha',
-                tags: ['Operations', 'Manufacturing', 'Management']
-              },
-              {
-                title: 'Project Consultant',
-                company: 'NPCIL - Government of India',
-                location: 'Pan-India Projects',
-                tags: ['Government', 'Nuclear', 'Infrastructure']
-              }
-            ].map((role, idx) => (
-              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold text-gray-900">{role.title}</h3>
-                  <span className="text-blue-600 font-semibold text-sm">{role.company}</span>
-                </div>
-                <p className="text-gray-600 mb-6">{role.location}</p>
-                <div className="flex flex-wrap gap-2">
-                  {role.tags.map((tag, tagIdx) => (
-                    <span key={tagIdx} className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Social & Entrepreneurial Section */}
-      <section ref={el => sectionsRef.current[4] = el} className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 reveal-text">Social Work & Public Engagement</h2>
-              <div className="space-y-6">
-                {[
-                  { icon: '⚖️', title: 'Public Interest Litigations', desc: 'Against Corporate Fraud & Money Laundering' },
-                  { icon: '🤝', title: 'Fundraising Consultant', desc: 'To Charitable Organizations' },
-                  { icon: '🌍', title: 'Socio-Commercial Projects', desc: 'For Social Organizations' }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <div className="text-2xl">{item.icon}</div>
-                    <div>
-                      <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
-                      <p className="text-gray-600">{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {/* Govt Card */}
+            <div className="bg-slate-900 text-white p-10 rounded-3xl shadow-xl relative overflow-hidden group interactive">
+               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full mix-blend-multiply filter blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2"></div>
+               <h3 className="text-3xl font-bold mb-6 relative z-10">Government Projects</h3>
+               <ul className="space-y-4 relative z-10 text-slate-300">
+                  <li className="flex items-start"><span className="text-blue-400 mr-2">➜</span> Nuclear Power Corporation (NPCIL)</li>
+                  <li className="flex items-start"><span className="text-blue-400 mr-2">➜</span> Medical Infrastructure (Govt. of India)</li>
+                  <li className="flex items-start"><span className="text-blue-400 mr-2">➜</span> BARC Radiological Labs</li>
+               </ul>
             </div>
-            
-            <div>
-              <h2 className="text-4xl font-bold text-gray-900 mb-8 reveal-text">Entrepreneurial Experience</h2>
-              <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
-                <div className="text-4xl mb-4">👔</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Textile Sector Entrepreneur</h3>
-                <p className="text-gray-600 mb-6">
-                  Hands-on experience in business development, operations, and market expansion in the textile industry
-                </p>
-                <div className="flex flex-wrap justify-center gap-2">
-                  {['Business Development', 'Market Strategy', 'Operations'].map((tag, idx) => (
-                    <span key={idx} className="bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm">
-                      {tag}
-                    </span>
-                  ))}
+
+            {/* Industrial Card */}
+            <div className="bg-blue-50 text-slate-900 p-10 rounded-3xl shadow-xl border border-blue-100 relative overflow-hidden group interactive">
+               <h3 className="text-3xl font-bold mb-6">Industrial Sectors</h3>
+               <ul className="space-y-4 text-slate-700">
+                  <li className="flex items-start"><span className="text-blue-600 mr-2">➜</span> Textile & Garment Units</li>
+                  <li className="flex items-start"><span className="text-blue-600 mr-2">➜</span> Pulp & Paper Industry</li>
+                  <li className="flex items-start"><span className="text-blue-600 mr-2">➜</span> FMCG & Plastic Manufacturing</li>
+               </ul>
+            </div>
+          </div>
+
+          {/* Current Project Banner */}
+          <div className="mt-8 bg-blue-600 text-white p-10 rounded-3xl shadow-xl relative overflow-hidden interactive">
+             <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                   <span className="bg-blue-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Currently Active</span>
+                   <h3 className="text-2xl font-bold mt-4">Govt. High School for Deaf & Dumb</h3>
+                   <p className="text-blue-100 mt-2">Large-scale IT & Digitalization Project in Andhra Pradesh.</p>
                 </div>
-              </div>
+                <div className="text-5xl font-bold opacity-20">2026</div>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Corporate Expertise Checklist */}
+      <section ref={el => sectionsRef.current[2] = el} className="py-24 px-4 sm:px-6 lg:px-8 bg-slate-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">Corporate Capabilities</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                'Industrial MOUs & Joint Ventures',
+                'Corporate Investment Planning',
+                'Government Tenders & Contracts',
+                'Franchise & Dealer Management',
+                'Procurement & Indenting',
+                'Vendor Management',
+                'Debt Recovery & Settlement',
+                'Labour Dispute Resolution',
+                'Arbitration & Conciliation'
+              ].map((item, index) => (
+                <div key={index} className="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-500 hover:shadow-md transition-all duration-300">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-xs font-bold">✓</div>
+                  <span className="text-gray-700 font-medium">{item}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section ref={el => sectionsRef.current[5] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50" id="contact">
+      <section ref={el => sectionsRef.current[5] = el} className="py-24 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100" id="contact">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Get In Touch</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
-          </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              {[
-                { icon: '📍', title: 'Office Address', lines: ['A-3, Hi-Tech Plaza, Sundarpada', 'Bhubaneswar – 751002, Odisha'] },
-                { icon: '📱', title: 'Mobile Numbers', lines: ['+91 8260232337', '+91 6353778329'] },
-                { icon: '✉️', title: 'Email', lines: ['hemant.parekh2012@gmail.com'] },
-                { icon: '🏙️', title: 'Base Locations', lines: ['Bhubaneswar / Bengaluru', 'Available for projects across India'] }
-              ].map((item, idx) => (
-                <div key={idx} className="flex items-start space-x-4">
-                  <div className="text-2xl text-blue-600">{item.icon}</div>
-                  <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
-                    {item.lines.map((line, lineIdx) => (
-                      <p key={lineIdx} className={`text-gray-600 ${lineIdx === item.lines.length - 1 && line.includes('Available') ? 'text-blue-600 text-sm mt-1' : ''}`}>
-                        {line}
-                      </p>
-                    ))}
-                  </div>
+          <div className="grid lg:grid-cols-2 gap-16">
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-8">Let's Discuss Your Project</h2>
+              <p className="text-gray-600 mb-12 text-lg">
+                 Whether you need strategic direction for a government project or operational efficiency in manufacturing, I am available for consultation.
+              </p>
+
+              <div className="space-y-8">
+                <div className="flex items-start space-x-6">
+                   <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xl">📍</div>
+                   <div>
+                      <h4 className="font-bold text-gray-900 text-lg">Headquarters</h4>
+                      <p className="text-gray-600 mt-1">A-3, Hi-Tech Plaza, Sundarpada<br/>Bhubaneswar – 751002, Odisha</p>
+                   </div>
                 </div>
-              ))}
+                <div className="flex items-start space-x-6">
+                   <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xl">📞</div>
+                   <div>
+                      <h4 className="font-bold text-gray-900 text-lg">Direct Contact</h4>
+                      <p className="text-gray-600 mt-1">+91 82602 32337</p>
+                      <p className="text-gray-600">+91 63537 78329</p>
+                   </div>
+                </div>
+                <div className="flex items-start space-x-6">
+                   <div className="w-12 h-12 bg-blue-50 rounded-full flex items-center justify-center text-blue-600 text-xl">✉️</div>
+                   <div>
+                      <h4 className="font-bold text-gray-900 text-lg">Email</h4>
+                      <p className="text-gray-600 mt-1">hemant.parekh2012@gmail.com</p>
+                   </div>
+                </div>
+              </div>
             </div>
             
-            <div className="bg-white p-8 rounded-2xl shadow-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
+            <div className="bg-gray-50 p-8 rounded-3xl shadow-lg border border-gray-100">
               <form className="space-y-6">
-                <div>
-                  <input 
-                    type="text" 
-                    placeholder="Your Name" 
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-                  />
+                <div className="grid grid-cols-2 gap-6">
+                   <input type="text" placeholder="Name" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 bg-white" />
+                   <input type="text" placeholder="Phone" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 bg-white" />
                 </div>
-                <div>
-                  <input 
-                    type="email" 
-                    placeholder="Your Email" 
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-                  />
-                </div>
-                <div>
-                  <input 
-                    type="text" 
-                    placeholder="Subject" 
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-                  />
-                </div>
-                <div>
-                  <textarea 
-                    placeholder="Your Message" 
-                    rows="4"
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
-                  ></textarea>
-                </div>
-                <button 
-                  type="submit" 
-                  className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 interactive"
-                >
+                <input type="email" placeholder="Email Address" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 bg-white" />
+                <textarea placeholder="Project Details" rows="4" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-blue-600 focus:ring-1 focus:ring-blue-600 bg-white"></textarea>
+                <button type="submit" className="w-full bg-blue-600 text-white px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors duration-300 shadow-lg interactive">
                   Send Message
                 </button>
               </form>
@@ -561,31 +402,16 @@ const PortfolioWebsite = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center font-bold">HCP</div>
-              <div>
-                <h4 className="text-lg font-bold">H.C. Parekh</h4>
-                <p className="text-gray-300">Senior Project Consultant & Investor</p>
-                <p className="text-gray-400 text-sm">Since 2007</p>
-              </div>
+      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-sm">HCP</div>
+              <p className="text-gray-400 text-sm">© {new Date().getFullYear()} H.C. Parekh. All rights reserved.</p>
             </div>
-            
-            <div className="flex flex-wrap gap-6 items-center">
-              {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-300 hover:text-white transition-colors">
-                  {item}
-                </a>
-              ))}
+            <div className="flex gap-6 text-sm text-gray-400">
+               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
             </div>
-            
-            <div className="text-center md:text-right">
-              <p className="text-gray-400">© {new Date().getFullYear()} H.C. Parekh. All rights reserved.</p>
-              <p className="text-gray-500 text-sm mt-2">Professional Project Consultant - Industrial & Corporate</p>
-            </div>
-          </div>
         </div>
       </footer>
 
