@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import Lenis from '@studio-freight/lenis';
-// import './Page7.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -129,17 +128,6 @@ const PortfolioWebsite = () => {
       );
     });
 
-    gsap.to('.parallax-bg', {
-      yPercent: 30,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: '.portfolio-website',
-        start: 'top top',
-        end: 'bottom top',
-        scrub: true
-      }
-    });
-
     const textElements = document.querySelectorAll('.reveal-text');
     textElements.forEach(text => {
       gsap.fromTo(text,
@@ -174,405 +162,464 @@ const PortfolioWebsite = () => {
   };
 
   return (
-    <div className="portfolio-website">
-      <div ref={cursorRef} className="custom-cursor"></div>
-      <div ref={cursorFollowerRef} className="cursor-follower"></div>
+    <div className="relative min-h-screen bg-white cursor-none">
+      {/* Custom Cursor */}
+      <div ref={cursorRef} className="fixed w-2 h-2 bg-blue-600 rounded-full pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 mix-blend-difference"></div>
+      <div ref={cursorFollowerRef} className="fixed w-10 h-10 border-2 border-blue-600 rounded-full pointer-events-none z-40 transform -translate-x-1/2 -translate-y-1/2 opacity-30 transition-transform duration-300"></div>
 
-      <div className="floating-elements">
-        <div className="floating-circle circle-1"></div>
-        <div className="floating-circle circle-2"></div>
-        <div className="floating-circle circle-3"></div>
-        <div className="floating-square rotating-element"></div>
+      {/* Floating Background Elements */}
+      <div className="fixed inset-0 pointer-events-none z-1 overflow-hidden">
+        <div className="absolute w-72 h-72 top-10 -right-36 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-1"></div>
+        <div className="absolute w-48 h-48 bottom-20 -left-24 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-2"></div>
+        <div className="absolute w-36 h-36 top-60 right-1/4 bg-gradient-to-br from-blue-600 to-transparent rounded-full opacity-10 animate-float-3"></div>
+        <div className="absolute w-24 h-24 top-1/3 left-1/4 border-2 border-blue-600 opacity-5 rotating-element"></div>
       </div>
 
-      <header className="header">
-        <div className="logo-container">
-          <div className="logo-placeholder">
-            <span className="logo-text">HCP</span>
-            <div className="logo-dot"></div>
+      {/* Header */}
+      <header className="fixed top-0 w-full px-4 sm:px-6 lg:px-8 py-6 bg-white/95 backdrop-blur-lg z-40 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="flex items-center space-x-4">
+            <div className="relative w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center">
+              <span className="text-white font-bold text-xl">HCP</span>
+              <div className="absolute bottom-3 right-3 w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            </div>
+            <div>
+              <h1 className="text-lg font-bold text-gray-900">H.C. Parekh</h1>
+              <p className="text-sm text-blue-600">Senior Project Consultant & Investor</p>
+            </div>
           </div>
-          <div className="brand-info">
-            <h1 className="brand-name">H.C. Parekh</h1>
-            <p className="designation">Senior Project Consultant & Investor</p>
-          </div>
+          <nav className="hidden md:flex space-x-8">
+            {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
+              <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-800 font-medium hover:text-blue-600 transition-colors relative group">
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
+          </nav>
         </div>
-        <nav className="nav">
-          <a href="#about" className="nav-link">About</a>
-          <a href="#experience" className="nav-link">Experience</a>
-          <a href="#projects" className="nav-link">Projects</a>
-          <a href="#contact" className="nav-link">Contact</a>
-        </nav>
       </header>
 
-    <section ref={heroRef} className="hero-section">
-  <div className="hero-container">
-    <div className="hero-content">
-      <div className="hero-badge">
-        <span className="badge-text">Est. 2007</span>
-        <div className="badge-dot"></div>
-      </div>
-      
-      <h1 className="hero-title reveal-text">
-        Industrial & Corporate
-        <span className="title-highlight">Project Consultant</span>
-      </h1>
-      
-      <p className="hero-subtitle reveal-text">
-        {getExperienceYears()}+ years of expertise in Government, Corporate & Manufacturing sectors
-      </p>
-      
-      <div className="hero-stats">
-        <div className="stat">
-          <h3>18+</h3>
-          <p>Years Experience</p>
-        </div>
-        <div className="stat">
-          <h3>50+</h3>
-          <p>Projects Delivered</p>
-        </div>
-        <div className="stat">
-          <h3>2</h3>
-          <p>Base Locations</p>
-        </div>
-      </div>
-
-      <a href="#contact" className="cta-button interactive">
-        <span>Get In Touch</span>
-        <div className="button-arrow">→</div>
-      </a>
-    </div>
-    
-    <div className="hero-image-container">
-      <div className="image-frame">
-        <div className="image-wrapper">
-  <img 
-    src="https://img.freepik.com/free-photo/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background_662251-838.jpg?semt=ais_hybrid&w=740&q=80" 
-    alt="H.C. Parekh - Professional Consultant"
-    className="professional-image"
-  />
-  
-  {/* Floating Elements Around Image */}
-  <div className="floating-badge badge-1">
-    <div className="badge-icon">🏭</div>
-    <span>Industrial</span>
-  </div>
-  <div className="floating-badge badge-2">
-    <div className="badge-icon">🏛️</div>
-    <span>Government</span>
-  </div>
-  <div className="floating-badge badge-3">
-    <div className="badge-icon">💼</div>
-    <span>Corporate</span>
-  </div>
-</div>
-      </div>
-    </div>
-  </div>
-  
-  <div className="hero-background parallax-bg">
-    <div className="grid-overlay"></div>
-  </div>
-</section>
-      <section ref={el => sectionsRef.current[0] = el} className="section" id="about">
-        <div className="section-header">
-          <h2 className="section-title reveal-text">Professional Overview</h2>
-          <div className="section-line"></div>
-        </div>
-        
-        <div className="about-grid">
-          <div className="about-card">
-            <div className="card-icon">📋</div>
-            <h3>Working Model</h3>
-            <p>Freelance Consultant</p>
-            <p className="card-desc">Independent consultant offering flexible engagement models</p>
-          </div>
-          
-          <div className="about-card">
-            <div className="card-icon">🏭</div>
-            <h3>Industries Served</h3>
-            <p>Government, Corporate & Manufacturing</p>
-            <p className="card-desc">Multi-sector expertise with deep industry knowledge</p>
-          </div>
-          
-          <div className="about-card">
-            <div className="card-icon">📍</div>
-            <h3>Base Locations</h3>
-            <p>Bhubaneswar / Bengaluru</p>
-            <p className="card-desc">Operating pan-India with dual operational bases</p>
-          </div>
-          
-          <div className="about-card">
-            <div className="card-icon">🎯</div>
-            <h3>Specialization</h3>
-            <p>End-to-End Project Implementation</p>
-            <p className="card-desc">From concept to completion and beyond</p>
-          </div>
-        </div>
-      </section>
-
-      <section ref={el => sectionsRef.current[1] = el} className="section dark-section" id="experience">
-        <div className="section-header">
-          <h2 className="section-title reveal-text">Area of Expertise</h2>
-          <div className="section-line"></div>
-        </div>
-        
-        <div className="timeline">
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <h3>Government Projects</h3>
-              <ul className="experience-list">
-                <li>Nuclear Power Corporation of India Ltd. (NPCIL)</li>
-                <li>Medical & Healthcare Projects (Government of India)</li>
-                <li>Bhabha Atomic Research Centre - Environment & Radiological Laboratory</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <h3>Industrial Sectors</h3>
-              <ul className="experience-list">
-                <li>Textile & Garment Industry</li>
-                <li>Pulp & Paper Industry</li>
-                <li>Plastic Manufacturing Industry</li>
-                <li>Information Technology</li>
-                <li>FMCG</li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="timeline-item">
-            <div className="timeline-dot"></div>
-            <div className="timeline-content">
-              <h3>Current Engagement</h3>
-              <div className="current-project">
-                <h4>Large IT & Digitalization Project</h4>
-                <p>Government High School for Deaf and Dumb, Andhra Pradesh</p>
-                <span className="project-status">Ongoing</span>
+      {/* Hero Section */}
+      <section ref={heroRef} className="min-h-screen px-4 sm:px-6 lg:px-8 py-20 relative overflow-hidden">
+        <div className="max-w-7xl mx-auto pt-16 md:pt-24 lg:pt-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="inline-flex items-center space-x-3 bg-blue-50 px-6 py-3 rounded-full">
+                <span className="text-blue-600 font-semibold">Est. 2007</span>
+                <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={el => sectionsRef.current[2] = el} className="section">
-        <div className="section-header">
-          <h2 className="section-title reveal-text">Corporate Expertise</h2>
-          <div className="section-line"></div>
-        </div>
-        
-        <div className="expertise-grid">
-          {[
-            'Industrial MOUs & Joint Ventures',
-            'Corporate Investors & Investments',
-            'Tenders & Contracts',
-            'Dealers, Distributors & Franchise Management',
-            'Indenting & Procurement',
-            'Central Material Management',
-            'Vendor Management',
-            'Company Debt Recovery & Settlement',
-            'Labour Dispute Settlement',
-            'Consumer Grievance Resolution',
-            'Government Arbitration & Conciliation'
-          ].map((item, index) => (
-            <div key={index} className="expertise-item interactive">
-              <div className="expertise-icon">✓</div>
-              <span>{item}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section ref={el => sectionsRef.current[3] = el} className="section dark-section">
-        <div className="section-header">
-          <h2 className="section-title reveal-text">Professional History</h2>
-          <div className="section-line"></div>
-        </div>
-        
-        <div className="history-cards">
-          <div className="history-card">
-            <div className="history-card-header">
-              <h3>Chief Business Officer (CBO)</h3>
-              <span className="history-period">IT Company</span>
-            </div>
-            <p className="history-location">Pune, Maharashtra</p>
-            <div className="history-tags">
-              <span className="tag">Leadership</span>
-              <span className="tag">Strategy</span>
-              <span className="tag">Business Development</span>
-            </div>
-          </div>
-          
-          <div className="history-card">
-            <div className="history-card-header">
-              <h3>General Manager (Business)</h3>
-              <span className="history-period">Plastic Manufacturing</span>
-            </div>
-            <p className="history-location">Odisha</p>
-            <div className="history-tags">
-              <span className="tag">Operations</span>
-              <span className="tag">Manufacturing</span>
-              <span className="tag">Management</span>
-            </div>
-          </div>
-          
-          <div className="history-card">
-            <div className="history-card-header">
-              <h3>Project Consultant</h3>
-              <span className="history-period">NPCIL - Government of India</span>
-            </div>
-            <p className="history-location">Pan-India Projects</p>
-            <div className="history-tags">
-              <span className="tag">Government</span>
-              <span className="tag">Nuclear</span>
-              <span className="tag">Infrastructure</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={el => sectionsRef.current[4] = el} className="section">
-        <div className="split-section">
-          <div className="split-left">
-            <div className="section-header">
-              <h2 className="section-title reveal-text">Social Work & Public Engagement</h2>
-            </div>
-            <div className="social-list">
-              <div className="social-item">
-                <div className="social-icon">⚖️</div>
-                <div>
-                  <h4>Public Interest Litigations</h4>
-                  <p>Against Corporate Fraud & Money Laundering</p>
+              
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight reveal-text">
+                Industrial & Corporate
+                <span className="text-blue-600 block mt-2">Project Consultant</span>
+              </h1>
+              
+              <p className="text-xl text-gray-600 leading-relaxed reveal-text">
+                {getExperienceYears()}+ years of expertise in Government, Corporate & Manufacturing sectors
+              </p>
+              
+              <div className="flex space-x-8">
+                <div className="text-center">
+                  <h3 className="text-4xl font-bold text-blue-600">18+</h3>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Years Experience</p>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-4xl font-bold text-blue-600">50+</h3>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Projects Delivered</p>
+                </div>
+                <div className="text-center">
+                  <h3 className="text-4xl font-bold text-blue-600">2</h3>
+                  <p className="text-sm text-gray-500 uppercase tracking-wider mt-1">Base Locations</p>
                 </div>
               </div>
-              <div className="social-item">
-                <div className="social-icon">🤝</div>
-                <div>
-                  <h4>Fundraising Consultant</h4>
-                  <p>To Charitable Organizations</p>
+
+              <a href="#contact" className="inline-flex items-center space-x-3 bg-blue-600 text-white px-8 py-4 rounded-full font-semibold hover:bg-blue-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl interactive">
+                <span>Get In Touch</span>
+                <div className="group-hover:translate-x-2 transition-transform">→</div>
+              </a>
+            </div>
+            
+            <div className="relative">
+              <div className="bg-white p-6 rounded-2xl shadow-2xl">
+                <div className="relative overflow-hidden rounded-xl">
+                  <img 
+                    src="https://img.freepik.com/free-photo/smiling-young-male-professional-standing-with-arms-crossed-while-making-eye-contact-against-isolated-background_662251-838.jpg?semt=ais_hybrid&w=740&q=80" 
+                    alt="H.C. Parekh - Professional Consultant"
+                    className="w-full h-[500px] object-cover rounded-xl transform transition-transform duration-500 hover:scale-105"
+                  />
                 </div>
-              </div>
-              <div className="social-item">
-                <div className="social-icon">🌍</div>
-                <div>
-                  <h4>Socio-Commercial Projects</h4>
-                  <p>For Social Organizations</p>
+                
+                {/* Floating Badges */}
+                <div className="absolute -top-3 right-12 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-1">
+                  <span className="text-xl">🏭</span>
+                  <span className="font-semibold text-gray-800">Industrial</span>
+                </div>
+                <div className="absolute bottom-16 -left-3 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-2">
+                  <span className="text-xl">🏛️</span>
+                  <span className="font-semibold text-gray-800">Government</span>
+                </div>
+                <div className="absolute -bottom-3 right-16 flex items-center space-x-2 bg-white px-4 py-2 rounded-full shadow-lg animate-float-3">
+                  <span className="text-xl">💼</span>
+                  <span className="font-semibold text-gray-800">Corporate</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section ref={el => sectionsRef.current[0] = el} className="py-20 px-4 sm:px-6 lg:px-8" id="about">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Professional Overview</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          </div>
           
-          <div className="split-right">
-            <div className="section-header">
-              <h2 className="section-title reveal-text">Entrepreneurial Experience</h2>
-            </div>
-            <div className="entrepreneur-card">
-              <div className="entrepreneur-icon">👔</div>
-              <h3>Textile Sector Entrepreneur</h3>
-              <p>Hands-on experience in business development, operations, and market expansion in the textile industry</p>
-              <div className="entrepreneur-tags">
-                <span className="tag">Business Development</span>
-                <span className="tag">Market Strategy</span>
-                <span className="tag">Operations</span>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: '📋', title: 'Working Model', desc: 'Freelance Consultant', detail: 'Independent consultant offering flexible engagement models' },
+              { icon: '🏭', title: 'Industries Served', desc: 'Government, Corporate & Manufacturing', detail: 'Multi-sector expertise with deep industry knowledge' },
+              { icon: '📍', title: 'Base Locations', desc: 'Bhubaneswar / Bengaluru', detail: 'Operating pan-India with dual operational bases' },
+              { icon: '🎯', title: 'Specialization', desc: 'End-to-End Project Implementation', detail: 'From concept to completion and beyond' }
+            ].map((item, index) => (
+              <div key={index} className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-shadow duration-300">
+                <div className="text-3xl mb-4">{item.icon}</div>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-blue-600 font-semibold mb-3">{item.desc}</p>
+                <p className="text-gray-600 text-sm">{item.detail}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section ref={el => sectionsRef.current[5] = el} className="section contact-section" id="contact">
-        <div className="section-header">
-          <h2 className="section-title reveal-text">Get In Touch</h2>
-          <div className="section-line"></div>
-        </div>
-        
-        <div className="contact-container">
-          <div className="contact-info">
-            <div className="contact-item">
-              <div className="contact-icon">📍</div>
-              <div>
-                <h4>Office Address</h4>
-                <p>A-3, Hi-Tech Plaza, Sundarpada</p>
-                <p>Bhubaneswar – 751002, Odisha</p>
-              </div>
-            </div>
-            
-            <div className="contact-item">
-              <div className="contact-icon">📱</div>
-              <div>
-                <h4>Mobile Numbers</h4>
-                <p>+91 8260232337</p>
-                <p>+91 6353778329</p>
-              </div>
-            </div>
-            
-            <div className="contact-item">
-              <div className="contact-icon">✉️</div>
-              <div>
-                <h4>Email</h4>
-                <p>hemant.parekh2012@gmail.com</p>
-              </div>
-            </div>
-            
-            <div className="contact-item">
-              <div className="contact-icon">🏙️</div>
-              <div>
-                <h4>Base Locations</h4>
-                <p>Bhubaneswar / Bengaluru</p>
-                <p className="location-note">Available for projects across India</p>
-              </div>
-            </div>
+      {/* Experience Timeline */}
+      <section ref={el => sectionsRef.current[1] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50" id="experience">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Area of Expertise</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
           </div>
           
-          <div className="contact-form">
-            <h3>Send a Message</h3>
-            <form>
-              <div className="form-group">
-                <input type="text" placeholder="Your Name" className="form-input" />
+          <div className="relative max-w-3xl mx-auto">
+            {/* Timeline line */}
+            <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600"></div>
+            
+            {[
+              {
+                title: 'Government Projects',
+                items: [
+                  'Nuclear Power Corporation of India Ltd. (NPCIL)',
+                  'Medical & Healthcare Projects (Government of India)',
+                  'Bhabha Atomic Research Centre - Environment & Radiological Laboratory'
+                ]
+              },
+              {
+                title: 'Industrial Sectors',
+                items: [
+                  'Textile & Garment Industry',
+                  'Pulp & Paper Industry',
+                  'Plastic Manufacturing Industry',
+                  'Information Technology',
+                  'FMCG'
+                ]
+              },
+              {
+                title: 'Current Engagement',
+                items: [
+                  {
+                    type: 'project',
+                    title: 'Large IT & Digitalization Project',
+                    desc: 'Government High School for Deaf and Dumb, Andhra Pradesh',
+                    status: 'Ongoing'
+                  }
+                ]
+              }
+            ].map((section, idx) => (
+              <div key={idx} className="relative mb-12 flex items-start">
+                <div className="absolute left-0 w-16 h-16 bg-white border-4 border-blue-600 rounded-full flex items-center justify-center z-10"></div>
+                <div className="ml-24 bg-white p-8 rounded-2xl shadow-lg flex-1">
+                  <h3 className="text-2xl font-bold text-blue-600 mb-4">{section.title}</h3>
+                  {section.items.map((item, itemIdx) => (
+                    section.title === 'Current Engagement' ? (
+                      <div key={itemIdx} className="bg-blue-50 p-6 rounded-xl">
+                        <h4 className="text-xl font-semibold text-gray-900 mb-2">{item.title}</h4>
+                        <p className="text-gray-600 mb-3">{item.desc}</p>
+                        <span className="inline-block bg-emerald-500 text-white px-4 py-1 rounded-full text-sm">
+                          {item.status}
+                        </span>
+                      </div>
+                    ) : (
+                      <div key={itemIdx} className="flex items-start mb-3">
+                        <div className="text-blue-600 mr-3 mt-1">•</div>
+                        <p className="text-gray-700">{item}</p>
+                      </div>
+                    )
+                  ))}
+                </div>
               </div>
-              <div className="form-group">
-                <input type="email" placeholder="Your Email" className="form-input" />
-              </div>
-              <div className="form-group">
-                <input type="text" placeholder="Subject" className="form-input" />
-              </div>
-              <div className="form-group">
-                <textarea placeholder="Your Message" rows="4" className="form-input"></textarea>
-              </div>
-              <button type="submit" className="submit-button interactive">
-                Send Message
-              </button>
-            </form>
+            ))}
           </div>
         </div>
       </section>
 
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-brand">
-            <div className="footer-logo">HCP</div>
+      {/* Corporate Expertise */}
+      <section ref={el => sectionsRef.current[2] = el} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Corporate Expertise</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              'Industrial MOUs & Joint Ventures',
+              'Corporate Investors & Investments',
+              'Tenders & Contracts',
+              'Dealers, Distributors & Franchise Management',
+              'Indenting & Procurement',
+              'Central Material Management',
+              'Vendor Management',
+              'Company Debt Recovery & Settlement',
+              'Labour Dispute Settlement',
+              'Consumer Grievance Resolution',
+              'Government Arbitration & Conciliation'
+            ].map((item, index) => (
+              <div key={index} className="flex items-center space-x-3 bg-white p-4 rounded-xl border border-gray-200 hover:border-blue-600 hover:shadow-lg transition-all duration-300 interactive">
+                <div className="text-blue-600 font-bold">✓</div>
+                <span className="text-gray-800">{item}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Professional History */}
+      <section ref={el => sectionsRef.current[3] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Professional History</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: 'Chief Business Officer (CBO)',
+                company: 'IT Company',
+                location: 'Pune, Maharashtra',
+                tags: ['Leadership', 'Strategy', 'Business Development']
+              },
+              {
+                title: 'General Manager (Business)',
+                company: 'Plastic Manufacturing',
+                location: 'Odisha',
+                tags: ['Operations', 'Manufacturing', 'Management']
+              },
+              {
+                title: 'Project Consultant',
+                company: 'NPCIL - Government of India',
+                location: 'Pan-India Projects',
+                tags: ['Government', 'Nuclear', 'Infrastructure']
+              }
+            ].map((role, idx) => (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+                <div className="flex justify-between items-start mb-4">
+                  <h3 className="text-xl font-bold text-gray-900">{role.title}</h3>
+                  <span className="text-blue-600 font-semibold text-sm">{role.company}</span>
+                </div>
+                <p className="text-gray-600 mb-6">{role.location}</p>
+                <div className="flex flex-wrap gap-2">
+                  {role.tags.map((tag, tagIdx) => (
+                    <span key={tagIdx} className="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Social & Entrepreneurial Section */}
+      <section ref={el => sectionsRef.current[4] = el} className="py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
             <div>
-              <h4>H.C. Parekh</h4>
-              <p>Senior Project Consultant & Investor</p>
-              <p>Since 2007</p>
+              <h2 className="text-4xl font-bold text-gray-900 mb-8 reveal-text">Social Work & Public Engagement</h2>
+              <div className="space-y-6">
+                {[
+                  { icon: '⚖️', title: 'Public Interest Litigations', desc: 'Against Corporate Fraud & Money Laundering' },
+                  { icon: '🤝', title: 'Fundraising Consultant', desc: 'To Charitable Organizations' },
+                  { icon: '🌍', title: 'Socio-Commercial Projects', desc: 'For Social Organizations' }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex items-start space-x-4 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div className="text-2xl">{item.icon}</div>
+                    <div>
+                      <h4 className="text-lg font-semibold text-gray-900 mb-1">{item.title}</h4>
+                      <p className="text-gray-600">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div>
+              <h2 className="text-4xl font-bold text-gray-900 mb-8 reveal-text">Entrepreneurial Experience</h2>
+              <div className="bg-white p-8 rounded-2xl shadow-lg text-center">
+                <div className="text-4xl mb-4">👔</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Textile Sector Entrepreneur</h3>
+                <p className="text-gray-600 mb-6">
+                  Hands-on experience in business development, operations, and market expansion in the textile industry
+                </p>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {['Business Development', 'Market Strategy', 'Operations'].map((tag, idx) => (
+                    <span key={idx} className="bg-blue-50 text-blue-600 px-4 py-2 rounded-full text-sm">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
-          
-          <div className="footer-links">
-            <a href="#about">About</a>
-            <a href="#experience">Experience</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section ref={el => sectionsRef.current[5] = el} className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50" id="contact">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4 reveal-text">Get In Touch</h2>
+            <div className="w-20 h-1 bg-blue-600 mx-auto rounded-full"></div>
           </div>
           
-          <div className="footer-legal">
-            <p>© {new Date().getFullYear()} H.C. Parekh. All rights reserved.</p>
-            <p className="footer-note">Professional Project Consultant - Industrial & Corporate</p>
+          <div className="grid lg:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              {[
+                { icon: '📍', title: 'Office Address', lines: ['A-3, Hi-Tech Plaza, Sundarpada', 'Bhubaneswar – 751002, Odisha'] },
+                { icon: '📱', title: 'Mobile Numbers', lines: ['+91 8260232337', '+91 6353778329'] },
+                { icon: '✉️', title: 'Email', lines: ['hemant.parekh2012@gmail.com'] },
+                { icon: '🏙️', title: 'Base Locations', lines: ['Bhubaneswar / Bengaluru', 'Available for projects across India'] }
+              ].map((item, idx) => (
+                <div key={idx} className="flex items-start space-x-4">
+                  <div className="text-2xl text-blue-600">{item.icon}</div>
+                  <div>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
+                    {item.lines.map((line, lineIdx) => (
+                      <p key={lineIdx} className={`text-gray-600 ${lineIdx === item.lines.length - 1 && line.includes('Available') ? 'text-blue-600 text-sm mt-1' : ''}`}>
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Send a Message</h3>
+              <form className="space-y-6">
+                <div>
+                  <input 
+                    type="text" 
+                    placeholder="Your Name" 
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="email" 
+                    placeholder="Your Email" 
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  />
+                </div>
+                <div>
+                  <input 
+                    type="text" 
+                    placeholder="Subject" 
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  />
+                </div>
+                <div>
+                  <textarea 
+                    placeholder="Your Message" 
+                    rows="4"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+                  ></textarea>
+                </div>
+                <button 
+                  type="submit" 
+                  className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300 interactive"
+                >
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center font-bold">HCP</div>
+              <div>
+                <h4 className="text-lg font-bold">H.C. Parekh</h4>
+                <p className="text-gray-300">Senior Project Consultant & Investor</p>
+                <p className="text-gray-400 text-sm">Since 2007</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-wrap gap-6 items-center">
+              {['About', 'Experience', 'Projects', 'Contact'].map((item) => (
+                <a key={item} href={`#${item.toLowerCase()}`} className="text-gray-300 hover:text-white transition-colors">
+                  {item}
+                </a>
+              ))}
+            </div>
+            
+            <div className="text-center md:text-right">
+              <p className="text-gray-400">© {new Date().getFullYear()} H.C. Parekh. All rights reserved.</p>
+              <p className="text-gray-500 text-sm mt-2">Professional Project Consultant - Industrial & Corporate</p>
+            </div>
           </div>
         </div>
       </footer>
+
+      {/* Add custom animations to tailwind.config.js */}
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0) rotate(0deg); }
+          50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        @keyframes float1 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-15px); }
+        }
+        @keyframes float2 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
+        @keyframes float3 {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-float-1 {
+          animation: float1 6s ease-in-out infinite;
+        }
+        .animate-float-2 {
+          animation: float2 8s ease-in-out infinite;
+        }
+        .animate-float-3 {
+          animation: float3 10s ease-in-out infinite;
+        }
+        .rotating-element {
+          animation: float 20s linear infinite;
+        }
+      `}</style>
     </div>
   );
 };
