@@ -13,7 +13,22 @@ const images = {
   corp: "https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069&auto=format&fit=crop", // Corporate Office
   social: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2070&auto=format&fit=crop", // Legal/Justice
 };
-
+const theme = {
+  colors: {
+    primary: "#0A4DA2",      // Royal Corporate Blue
+    secondary: "#1E88E5",    // Bright Action Blue
+    accent: "#E3F2FD",       // Light Blue Backgrounds
+    bg: "#FFFFFF",           // Clean White
+    textDark: "#0F172A",     // Deep Navy/Black
+    textLight: "#64748B",    // Slate Grey
+  },
+  images: {
+    hero: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", // Corporate Building
+    meeting: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2074&auto=format&fit=crop", // Boardroom
+    industrial: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070&auto=format&fit=crop", // Industrial/Factory
+    digital: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" // Tech/Digital
+  }
+};
 const Page5 = () => {
   const container = useRef(null);
 
@@ -132,6 +147,34 @@ const Page5 = () => {
         </div>
       </section>
 
+   <section id="about" className="py-24 px-6 md:px-20 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div className="reveal-text">
+            <h2 className={`text-sm font-bold uppercase tracking-widest text-[${theme.colors.secondary}] mb-4`}>Professional Overview</h2>
+            <h3 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
+              Bridging the gap between <span className="underline decoration-blue-200 underline-offset-4">Strategy</span> and <span className="underline decoration-blue-200 underline-offset-4">Execution</span>.
+            </h3>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              H.C. Parekh is a seasoned Project Consultant with over 18 years of experience. Whether it's Government of India projects (NPCIL) or large-scale Corporate Manufacturing, I ensure seamless implementation and dispute resolution.
+            </p>
+            
+            <div className="grid grid-cols-2 gap-8">
+              <div>
+                <p className={`text-4xl font-bold text-[${theme.colors.primary}]`}>18+</p>
+                <p className="text-sm text-gray-500 uppercase font-semibold">Years Active</p>
+              </div>
+              <div>
+                <p className={`text-4xl font-bold text-[${theme.colors.primary}]`}>Govt</p>
+                <p className="text-sm text-gray-500 uppercase font-semibold">Trusted Partner</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl reveal-text">
+            <div className="parallax-img w-full h-[120%] bg-cover bg-center" style={{backgroundImage: `url(${theme.images.meeting})`}}></div>
+          </div>
+        </div>
+      </section>
 
       {/* --- 2. THE INTRO (CLEAN TYPOGRAPHY) --- */}
       <section className="py-32 px-6 md:px-20 bg-white">
